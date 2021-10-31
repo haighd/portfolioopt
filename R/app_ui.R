@@ -9,8 +9,18 @@ app_ui <- function(request) {
     # Leave this function for adding external resources
     golem_add_external_resources(),
     # Your application UI logic 
-    fluidPage(
-      h1("portfolioopt")
+    shinyApp(
+      ui = dashboardPage(
+        options = list(sidebarExpandOnHover = TRUE),
+        header = dashboardHeader(),
+        sidebar = dashboardSidebar(minified = TRUE, collapsed = TRUE),
+        body = dashboardBody(
+          lapply(1:20, box, width = 12, title = "box")
+        ),
+        controlbar = dashboardControlbar(),
+        title = "DashboardPage"
+      ),
+      server = function(input, output) { }
     )
   )
 }
