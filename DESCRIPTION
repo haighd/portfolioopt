@@ -3,13 +3,23 @@ Title: Portfolio Optimization
 Version: 0.0.0.9000
 Authors@R: person('Dan', 'Haight', email = 'djhaight@gmail.com', role = c('cre', 'aut'))
 Description: Application to balance an investment portfolio, relative to expected return and asset risk.
-License: MIT + file LICENSE
+License: Apache License (>= 2)
 Imports: 
+    attempt,
     config (>= 0.3.1),
+    DT,
+    glue,
     golem (>= 0.3.1),
+    htmltools,
+    processx,
     shiny (>= 1.7.1)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
 URL: https://github.com/haighd/portfolioopt
 BugReports: https://github.com/haighd/portfolioopt/issues
+Suggests: 
+    spelling,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Language: en-US
