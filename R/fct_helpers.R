@@ -12,7 +12,7 @@ tickers <- function(){
   tickers_iex <- riingo::supported_tickers(type = "iex")
   tickers_crypto <- riingo::supported_tickers(type = "crypto")
   
-  tickers <- tickers_tiingo |>
+  df <- tickers_tiingo |>
     dplyr::filter(
       .data$endDate == max(.data$endDate, na.rm = T) 
       & priceCurrency == "USD"
@@ -26,7 +26,11 @@ tickers <- function(){
         dplyr::select(-.data$description, -.data$name),
       by = c("ticker", "exchange", "assetType", "priceCurrency")
     ) |>
-    dplyr::left_join(tickers_iex, by = c("ticker" = "Symbol"))
+    dplyr::left_join(tickers_iex, by = c("ticker" = "Symbol")) |>
+    dplyr::arrange(.data$ticker)
   
-  return(tickers)
+  return(df)
+  
 }
+
+memoise_tickers <- memoise::memoise(tickers)
