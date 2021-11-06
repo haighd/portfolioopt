@@ -5,6 +5,5 @@
 #' @import shiny
 #' @noRd
 app_server <- function( input, output, session ) {
-  # Your application server logic 
-  print(tickers)
+  mod_optimizer_server("optimizer_ui_1")
 }
