@@ -8,6 +8,7 @@ app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
+    shinyjs::useShinyjs(),
     # htmltools::htmlDependency(
     #   name = "font-awesome", version = "6.0.0",
     #   src = "./inst/app/www/font-awesome",
@@ -16,11 +17,11 @@ app_ui <- function(request) {
     # Your application UI logic 
     shinydashboardPlus::dashboardPage(
       header = shinydashboardPlus::dashboardHeader(
-        title = "Portfolio Optimizer & Backtester",
-        titleWidth = 300
+        titleWidth = 400,
+        leftUi = tagList(h4("Portfolio Optimizer & Backtester", style="color:white"))
       ),
       sidebar = shinydashboardPlus::dashboardSidebar(
-        width = 300,
+        width = 400,
         shinydashboard::sidebarMenu(
           id = "tabs",
           shinydashboard::menuItem(
@@ -28,9 +29,11 @@ app_ui <- function(request) {
             tabName = "optimizer", 
             icon = icon("chart-line")
           ),
-          shiny::conditionalPanel(
-            "input.tabs == 'optimizer'",
-            mod_optimizer_ui("optimizer_ui_1")
+          div(id="tohide",
+              shiny::conditionalPanel(
+                "input.tabs == 'optimizer'",
+                mod_optimizer_ui("optimizer_ui_1")
+              )
           )
         )
       ),
@@ -38,7 +41,8 @@ app_ui <- function(request) {
         shinydashboard::tabItems(
           shinydashboard::tabItem(
             tabName = "optimizer",
-            shinydashboardPlus::box(status = 'primary', solidHeader = TRUE)
+            mod_chartAssets_ui("chartAssets_ui_1"),
+            mod_efficientFrontier_ui("efficientFrontier_ui_1")
           )
         )
       ),

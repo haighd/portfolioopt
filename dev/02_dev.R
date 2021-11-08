@@ -18,11 +18,23 @@
 usethis::use_package( "thinkr" )
 usethis::use_package( "riingo" )
 usethis::use_package( "stringr" )
+usethis::use_package( "PerformanceAnalytics" )
+usethis::use_package( "lubridate" )
+usethis::use_package( "purrr" )
+usethis::use_package( "xts" )
+usethis::use_package( "PortfolioAnalytics" )
+usethis::use_package( "shinyjs" )
+usethis::use_package( "ROI" )
+usethis::use_package( "ROI.plugin.quadprog" )
+usethis::use_package( "ROI.plugin.glpk" )
+usethis::use_package( "quantmod" )
+usethis::use_package( "DEoptim" )
 
 ## Add modules ----
 ## Create a module infrastructure in R/
 golem::add_module( name = "sidebar" ) # Name of the module
-golem::add_module( name = "name_of_module2" ) # Name of the module
+golem::add_module( name = "chartAssets" ) # Name of the module
+golem::add_module( name = "efficientFrontier" )
 
 ## Add helper functions ----
 ## Creates fct_* and utils_*
