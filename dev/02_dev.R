@@ -29,6 +29,18 @@ usethis::use_package( "ROI.plugin.quadprog" )
 usethis::use_package( "ROI.plugin.glpk" )
 usethis::use_package( "quantmod" )
 usethis::use_package( "DEoptim" )
+usethis::use_package( "shinycssloaders" )
+usethis::use_package( "tidyselect" )
+usethis::use_package( "rlang" )
+usethis::use_package( "dplyr" )
+usethis::use_package( "ggplot2" )
+usethis::use_package( "shinydashboard" )
+usethis::use_package( "shinydashboardPlus" )
+usethis::use_package( "tibble" )
+usethis::use_package( "tidyr" )
+usethis::use_package( "zoo" )
+usethis::use_package( "shinyWidgets" )
+usethis::use_package( "spelling" )
 
 ## Add modules ----
 ## Create a module infrastructure in R/

@@ -46,8 +46,8 @@ prices <- function(ticker, type, start_date){
     res <- riingo::riingo_iex_prices(ticker, start_date = start_date, resample_frequency = "1day")
   } else {
     res <- riingo::riingo_prices(ticker, start_date = start_date, resample_frequency = "daily")
-    res <- res |> dplyr::select(ticker, date, adjClose) |>
-      dplyr::rename("close" = adjClose)
+    res <- res |> dplyr::select(ticker, date, .data$adjClose) |>
+      dplyr::rename("close" = .data$adjClose)
   }
   
   res <- res |>
@@ -69,12 +69,12 @@ tickers <- function(){
   df <- tickers_tiingo |>
     dplyr::filter(
       .data$endDate == max(.data$endDate, na.rm = T) 
-      & priceCurrency == "USD"
+      & .data$priceCurrency == "USD"
     ) |>
     dplyr::full_join(
       tickers_crypto |> 
         dplyr::mutate(ticker = toupper(.data$baseCurrency), .keep = "unused") |>
-        dplyr::filter(stringr::str_detect(quoteCurrency, "busd")) |>
+        dplyr::filter(stringr::str_detect(.data$quoteCurrency, "busd")) |>
         tibble::add_column("assetType" = "Crypto", "exchange" = "CRYPTO") |>
         dplyr::rename("priceCurrency" = .data$quoteCurrency) |>
         dplyr::select(-.data$description, -.data$name),
@@ -90,10 +90,10 @@ tickers <- function(){
 memoise_tickers <- memoise::memoise(tickers)
 
 efficientFrontier.fn <- function(R, nPorts){
-  
+
   # Expected returns and covariance matrix
   meanReturns <- colMeans(R)
-  covMat <- cov(R)
+  covMat <- stats::cov(R)
   stdDevs <- sqrt(diag(covMat))
   
   # create a portfolio
@@ -103,13 +103,13 @@ efficientFrontier.fn <- function(R, nPorts){
   port <- PortfolioAnalytics::add.constraint(port, type = "box", min = 0, max = 1)
   
   # Adding a leverage constraint for a fully-invested portfolio
-  port <- PortfolioAnalytics::add.constraint(portfolio = port, type = "full_investment")
+  port <- PortfolioAnalytics::add.constraint(portfolio = port, type = "weight_sum", min_sum=0.99, max_sum=1.01)
   
   # Find the minimum-variance portfolio
   mvp.port <- PortfolioAnalytics::add.objective(port, type = "risk", name = "var")
    
   mvp.opt <- PortfolioAnalytics::optimize.portfolio(R, mvp.port, momentFUN = "set.portfolio.moments", optimize_method = "DEoptim")
-  print(mvp.opt)
+  # print(mvp.opt)
   
   # Find minimum and maximum expected returns, and define a grid with nPorts portfolios
   minret <- mvp.opt$weights %*% meanReturns
@@ -129,7 +129,7 @@ efficientFrontier.fn <- function(R, nPorts){
     eff.frontier.risk[i] <- sqrt(t(eff.port$weights) %*% covMat %*% eff.port$weights)
     eff.frontier.return[i] <- eff.port$weights %*% meanReturns
     eff.frontier.weights[i,] <- t(eff.port$weights)
-    #print(paste(round(i / length(target.returns) * 100, 0), "% done..."))
+    # print(paste(round(i / length(target.returns) * 100, 0), "% done..."))
   }
   
   # save everything as a list
@@ -139,7 +139,8 @@ efficientFrontier.fn <- function(R, nPorts){
   names(eff.frontier) <- c("Risk", "Return")
   
   # add the weights
-  out <- list(eff.frontier, eff.frontier.weights)
-  names(out) <- c("EfficientFrontier", "Weights")
+  out <- list(eff.frontier, eff.frontier.weights, mvp.opt)
+  names(out) <- c("EfficientFrontier", "Weights", "mvp")
+  
   return(out)
 }

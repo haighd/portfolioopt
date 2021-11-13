@@ -59,7 +59,7 @@ mod_chartAssets_server <- function(id, vals){
       }
       
       returns <- PerformanceAnalytics::CalculateReturns(res)
-      assetVals$returns <- na.omit(returns)
+      assetVals$returns <- stats::na.omit(returns)
       
     }, ignoreNULL = TRUE)
     
@@ -97,7 +97,7 @@ mod_chartAssets_server <- function(id, vals){
         )
     })
     
-    return(shiny::reactive({assetVals$returns}))
+    return(assetVals)
     
   })
 }
