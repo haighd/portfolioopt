@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Pushes to another repository
-        uses: haighd/portfolioopt@main
+        uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
@@ -36,3 +36,4 @@ jobs:
           destination-repository-name: 'shiny-server'
           user-email: djhaight@gmail.com
           target-branch: master
+          target-directory: portfolioopt
