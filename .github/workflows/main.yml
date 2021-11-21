@@ -35,4 +35,4 @@ jobs:
           destination-github-username: 'haighd'
           destination-repository-name: 'shiny-server'
           user-email: djhaight@gmail.com
-          target-branch: main
+          target-branch: master
