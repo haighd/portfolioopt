@@ -5,7 +5,9 @@ account: haighd
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 5118210
-bundleId: 5273977
+bundleId: 5274007
 url: https://haighd.shinyapps.io/portfolioopt/
-when: 1637421297.8776
-lastSyncTime: 1637421297.8776
+when: 1637421915.92603
+lastSyncTime: 1637421915.92604
+asMultiple: FALSE
+asStatic: FALSE
