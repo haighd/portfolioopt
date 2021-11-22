@@ -1,6 +1,6 @@
 Package: portfolioopt
 Title: Portfolio Optimization
-Version: 0.0.0.9000
+Version: 1.0.0.0000
 Authors@R: person('Dan', 'Haight', email = 'djhaight@gmail.com', role = c('cre', 'aut'))
 Description: Application to balance an investment portfolio, relative to expected return and asset risk.
 License: Apache License (>= 2)
