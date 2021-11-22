@@ -17,6 +17,10 @@ mod_efficientFrontier_ui <- function(id){
       shinydashboard::tabBox(
         id = ns("tabset2"),
         width = 12,
+        shiny::tabPanel(
+          title = "Minimum Variance Optimal Portfolio",
+          tableOutput(ns("mvp"))
+        ),
         title = actionButton(ns("btnOptimize"), label = "Optimize"),
         shiny::tabPanel(
           title = "Risk vs. Returns", 
@@ -25,10 +29,6 @@ mod_efficientFrontier_ui <- function(id){
         shiny::tabPanel(
           title = "Asset Weights", 
           plotOutput(ns("weightsPlot"))
-        ),
-        shiny::tabPanel(
-          title = "Minimum Variance Optimal Portfolio",
-          tableOutput(ns("mvp"))
         )
       )
     )
