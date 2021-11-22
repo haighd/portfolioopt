@@ -11,20 +11,7 @@ RUN Rscript -e 'remotes::install_version("purrr",upgrade="never", version = "0.3
 RUN Rscript -e 'remotes::install_version("dplyr",upgrade="never", version = "1.0.7")'
 RUN Rscript -e 'remotes::install_version("stringr",upgrade="never", version = "1.4.0")'
 RUN Rscript -e 'remotes::install_version("testthat",upgrade="never", version = "3.1.0")'
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 RUN Rscript -e 'remotes::install_version("remotes",upgrade="never", version = "2.4.1")'
->>>>>>> c46e74f (Dockerized)
-=======
-<<<<<<< HEAD
-=======
-RUN Rscript -e 'remotes::install_version("remotes",upgrade="never", version = "2.4.1")'
->>>>>>> c46e74f (Dockerized)
-=======
-RUN Rscript -e 'remotes::install_version("remotes",upgrade="never", version = "2.4.1")'
->>>>>>> a87dd21 (Dockerized)
->>>>>>> 72a2981 (Dockerized)
 RUN Rscript -e 'remotes::install_version("pkgload",upgrade="never", version = "1.2.2")'
 RUN Rscript -e 'remotes::install_version("htmltools",upgrade="never", version = "0.5.2")'
 RUN Rscript -e 'remotes::install_version("shiny",upgrade="never", version = "1.7.1")'
