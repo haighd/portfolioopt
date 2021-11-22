@@ -21,6 +21,7 @@ Imports:
     processx,
     purrr,
     quantmod,
+    remotes,
     riingo,
     rlang,
     ROI,

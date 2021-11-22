@@ -41,6 +41,7 @@ usethis::use_package( "tidyr" )
 usethis::use_package( "zoo" )
 usethis::use_package( "shinyWidgets" )
 usethis::use_package( "spelling" )
+usethis::use_package( "remotes" )
 
 ## Add modules ----
 ## Create a module infrastructure in R/
