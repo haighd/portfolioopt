@@ -6,7 +6,7 @@
 #'
 #' @noRd
 #' @importFrom rlang .data
-#' @import PortfolioAnalytics
+#' @importFrom PortfolioAnalytics add.constraint add.objective optimize.portfolio portfolio.spec set.portfolio.moments
 #' @import DEoptim
 #' @import ROI
 #' @import ROI.plugin.glpk

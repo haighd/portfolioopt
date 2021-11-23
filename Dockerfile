@@ -1,10 +1,10 @@
 FROM rocker/r-ver:4.1.2
 RUN apt-get update && apt-get install -y  git-core libcairo2-dev libcurl4-openssl-dev libgit2-dev libglpk-dev libicu-dev libssl-dev libxml2-dev make pandoc pandoc-citeproc && rm -rf /var/lib/apt/lists/*
-RUN echo "options(repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl', Ncpus = 4)" >> /usr/local/lib/R/site-library
+RUN echo "options(repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl', Ncpus = 4)" >> /usr/local/lib/R/etc/Rprofile.site
 RUN R -e 'install.packages("remotes")'
-RUN Rscript -e 'remotes::install_version("tibble",upgrade="never", version = "3.1.5")'
-RUN Rscript -e 'remotes::install_version("rlang",upgrade="never", version = "0.4.11")'
-RUN Rscript -e 'remotes::install_version("glue",upgrade="never", version = "1.4.2")'
+RUN Rscript -e 'remotes::install_version("tibble",upgrade="never", version = "3.1.6")'
+RUN Rscript -e 'remotes::install_version("rlang",upgrade="never", version = "0.4.12")'
+RUN Rscript -e 'remotes::install_version("glue",upgrade="never", version = "1.5.0")'
 RUN Rscript -e 'remotes::install_version("processx",upgrade="never", version = "3.5.2")'
 RUN Rscript -e 'remotes::install_version("tidyselect",upgrade="never", version = "1.1.1")'
 RUN Rscript -e 'remotes::install_version("purrr",upgrade="never", version = "0.3.4")'
@@ -12,7 +12,7 @@ RUN Rscript -e 'remotes::install_version("dplyr",upgrade="never", version = "1.0
 RUN Rscript -e 'remotes::install_version("stringr",upgrade="never", version = "1.4.0")'
 RUN Rscript -e 'remotes::install_version("testthat",upgrade="never", version = "3.1.0")'
 RUN Rscript -e 'remotes::install_version("remotes",upgrade="never", version = "2.4.1")'
-RUN Rscript -e 'remotes::install_version("pkgload",upgrade="never", version = "1.2.2")'
+RUN Rscript -e 'remotes::install_version("pkgload",upgrade="never", version = "1.2.3")'
 RUN Rscript -e 'remotes::install_version("htmltools",upgrade="never", version = "0.5.2")'
 RUN Rscript -e 'remotes::install_version("shiny",upgrade="never", version = "1.7.1")'
 RUN Rscript -e 'remotes::install_version("zoo",upgrade="never", version = "1.8-9")'
@@ -37,7 +37,6 @@ RUN Rscript -e 'remotes::install_version("riingo",upgrade="never", version = "0.
 RUN Rscript -e 'remotes::install_version("quantmod",upgrade="never", version = "0.4.18")'
 RUN Rscript -e 'remotes::install_version("PortfolioAnalytics",upgrade="never", version = "1.1.0")'
 RUN Rscript -e 'remotes::install_version("golem",upgrade="never", version = "0.3.1")'
-RUN Rscript -e 'remotes::install_version("DT",upgrade="never", version = "0.19")'
 RUN Rscript -e 'remotes::install_version("DEoptim",upgrade="never", version = "2.2-6")'
 RUN mkdir /build_zone
 ADD . /build_zone
