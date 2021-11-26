@@ -87,8 +87,7 @@ mod_optimizer_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
     
-    vals <- shiny::reactiveValues(
-    )
+    vals <- shiny::reactiveValues()
     
     observe({
       shinyjs::toggle("weightSlider", condition=input$weightSwitch)
@@ -98,7 +97,7 @@ mod_optimizer_server <- function(id){
       shinyjs::toggle("boxSlider", condition=input$boxSwitch)
     })
     
-    df <- shiny::reactive({memoise_tickers()})
+    df <- shiny::reactive({tickers()})
     
     observeEvent(df(), {
       req(df())
@@ -107,6 +106,8 @@ mod_optimizer_server <- function(id){
         inputId = "assetPicker",
         choice = split(df()$ticker, df()$assetType),
         server = TRUE)
+      
+      print(unique(df()$assetType))
     })
     
     observeEvent(input$assetPicker, {

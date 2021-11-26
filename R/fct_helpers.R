@@ -63,12 +63,20 @@ prices <- function(ticker, type, start_date){
 
 tickers <- function(){
   tickers_tiingo <- riingo::supported_tickers(type = "tiingo")
-  tickers_iex <- riingo::supported_tickers(type = "iex")
+  # tickers_iex <- riingo::supported_tickers(type = "iex")
   tickers_crypto <- riingo::supported_tickers(type = "crypto")
+  
+  print(nrow(tickers_tiingo))
+  print(head(tickers_tiingo))
+  print(tail(tickers_tiingo))
+  # print(nrow(tickers_iex))
+  print(nrow(tickers_crypto))
+  
+  print(paste("max_date: ", max(tickers_tiingo$endDate, na.rm = T) - lubridate::ddays(7)))
   
   df <- tickers_tiingo |>
     dplyr::filter(
-      .data$endDate == max(.data$endDate, na.rm = T) 
+      .data$endDate >= (max(tickers_tiingo$endDate, na.rm = T) - lubridate::ddays(7))
       & .data$priceCurrency == "USD"
     ) |>
     dplyr::full_join(
@@ -80,14 +88,14 @@ tickers <- function(){
         dplyr::select(-.data$description, -.data$name),
       by = c("ticker", "exchange", "assetType", "priceCurrency")
     ) |>
-    dplyr::left_join(tickers_iex, by = c("ticker" = "Symbol")) |>
+    # dplyr::left_join(tickers_iex, by = c("ticker" = "Symbol")) |>
     dplyr::arrange(.data$ticker)
   
   return(df)
   
 }
 
-memoise_tickers <- memoise::memoise(tickers)
+# memoise_tickers <- memoise::memoise(tickers)
 
 efficientFrontier.fn <- function(R, nPorts){
 
