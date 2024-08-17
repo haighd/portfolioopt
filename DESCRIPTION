@@ -42,7 +42,11 @@ Imports:
     zoo
 Encoding: UTF-8
 LazyData: true
+<<<<<<< HEAD
 RoxygenNote: 7.2.1
+=======
+RoxygenNote: 7.3.2
+>>>>>>> cf9458f (added manifest.json)
 URL: https://github.com/haighd/portfolioopt
 BugReports: https://github.com/haighd/portfolioopt/issues
 Suggests: 
