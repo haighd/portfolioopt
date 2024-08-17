@@ -85,7 +85,7 @@ tickers <- function(){
         dplyr::filter(stringr::str_detect(.data$quoteCurrency, "busd")) |>
         tibble::add_column("assetType" = "Crypto", "exchange" = "CRYPTO") |>
         dplyr::rename("priceCurrency" = .data$quoteCurrency) |>
-        dplyr::select(-.data$description, -.data$name),
+        dplyr::select(-.data$name), #-.data$description, 
       by = c("ticker", "exchange", "assetType", "priceCurrency")
     ) |>
     # dplyr::left_join(tickers_iex, by = c("ticker" = "Symbol")) |>
